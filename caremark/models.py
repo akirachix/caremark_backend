@@ -42,6 +42,7 @@ class ImageVerification(models.Model):
     
 
 class MedicineInformation(models.Model):
+    medicine_names_choices=()
     medicine_name = models.CharField(max_length=50, null=True)
     time = (('morning', 'morning'), ('noon', 'noon'),
           ('evening', 'evening'), ('night', 'night'))
