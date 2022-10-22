@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,13 @@ SECRET_KEY = 'django-insecure-d2_@r0u+k!+bviek*ly73b(1m#!2#il1)d^^)5(t&g2x_s(ztf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # '52cf-197-232-143-191.eu.ngrok.io'
+    # '127.0.0.1' 
+    # '7f90-197-232-143-191.eu.ngrok.io'
+    # '7e6d-197-232-51-151.eu.ngrok.io'
+    #  '10d8-197-232-143-191.eu.ngrok.io'
+]
 
 
 # Application definition
@@ -38,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'caremark',
+    'rest_framework',
+    'knox',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'CareMark.urls'
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 TEMPLATES = [
     {
@@ -126,3 +138,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+    ]
+}
+django_heroku.settings(locals())
